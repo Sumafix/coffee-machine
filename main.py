@@ -46,8 +46,9 @@ def check_resources(drink_name):
     ingredients = MENU[drink_name]['ingredients']
     for ingredient in ingredients:
         if resources[ingredient] < ingredients[ingredient]:
-            return False, ingredient
-    return True, ""
+            print(f"Sorry, there is not enough {ingredient}.")
+            return False
+    return True
 
 
 def sum_coins(num_of_quarters, num_of_dimes, num_of_nickles, num_of_pennies):
@@ -63,8 +64,7 @@ while is_machine_work:
     elif command == "report":
         print(report_machine())
     else:
-        is_enough, what_to_low = check_resources(command)
-        if is_enough:
+        if check_resources(command):
             print("Please insert coins.")
             quarters = int(input("how many quarters?: "))
             dimes = int(input("how many dimes?: "))
@@ -83,5 +83,3 @@ while is_machine_work:
                 print(f"Here is your {command} ☕. Enjoy!")
             else:
                 print("Sorry that's not enough money. Money refunded.")
-        else:
-            print(f"Sorry, there is not enough {what_to_low}.")
