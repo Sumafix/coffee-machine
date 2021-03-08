@@ -44,14 +44,10 @@ def report_machine():
 
 def check_resources(drink_name):
     ingredients = MENU[drink_name]['ingredients']
-    if resources['water'] < ingredients['water']:
-        return False, 'water'
-    if 'milk' in ingredients:
-        if resources['milk'] < ingredients['milk']:
-            return False, 'milk'
-    if resources['coffee'] < ingredients['coffee']:
-        return False, 'coffee'
-    return True, ''
+    for ingredient in ingredients:
+        if resources[ingredient] < ingredients[ingredient]:
+            return False, ingredient
+    return True, ""
 
 
 def sum_coins(num_of_quarters, num_of_dimes, num_of_nickles, num_of_pennies):
